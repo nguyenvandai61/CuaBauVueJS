@@ -1,8 +1,8 @@
 <template>
     <div>
         <Score :score="score"/>
-        <Board :text="text" :num2text='num2text' 
-        :text2url='text2url'/>
+        <Board v-on:betScore='lostScore' :text="text" :num2text='num2text' 
+        :text2url='text2url' :score='score'/>
         <Dices :text="text" :num2text='num2text' 
         :text2url='text2url'/>
     </div>
@@ -33,6 +33,10 @@ export default {
             let images = require.context('../assets/', false, /\.jpg$/);
             return images('./'+text+'.jpg');
         },
+        lostScore() {
+            if(this.score > 0)
+                this.score-= 1000;
+        }
     }
 }
 </script>

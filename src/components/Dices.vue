@@ -47,7 +47,7 @@ export default {
 <style scoped>
 #dice-machine {
   
-  padding: auto 0;
+  padding-left: 0;
 }
 
 #dice-machine li{
