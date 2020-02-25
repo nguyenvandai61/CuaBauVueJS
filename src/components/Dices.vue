@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'Dices',
-  props: ['text'],
+  props: ['text', 'num2text', 'text2url'],
   data() {
     return {
       arr: [0, 0, 0],
@@ -35,13 +35,7 @@ export default {
         this.toogleIsRaised();
       }, 2000)
     },
-    num2text(n) {
-      return this.text[n];
-    },
-    text2url(text) {
-      var images = require.context('../assets/', false, /\.jpg$/);
-      return images('./'+text+'.jpg');
-    },
+   
     toogleIsRaised() {
       this.isRaised = !this.isRaised;
     }
@@ -61,6 +55,6 @@ export default {
   margin: 3px;
 }
 .dice-image {
-  width: 60px
+  width: 20%;
 }
 </style>

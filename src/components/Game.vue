@@ -1,8 +1,10 @@
 <template>
     <div>
-        <Score v-bind:score="score"/>
-        <Board/>
-        <Dices v-bind:text="text"/>
+        <Score :score="score"/>
+        <Board :text="text" :num2text='num2text' 
+        :text2url='text2url'/>
+        <Dices :text="text" :num2text='num2text' 
+        :text2url='text2url'/>
     </div>
 </template>
 
@@ -19,9 +21,18 @@ export default {
     },
     data() {
         return {
-            text: ["huou", "bau", "tom", "ca", "bau", "ga"],
+            text: ["huou", "cua", "tom", "ca", "bau", "ga"],
             score: 10000
         }
+    },
+    methods: {
+        num2text(n) {
+            return this.text[n];
+        },
+        text2url(text) {
+            let images = require.context('../assets/', false, /\.jpg$/);
+            return images('./'+text+'.jpg');
+        },
     }
 }
 </script>
