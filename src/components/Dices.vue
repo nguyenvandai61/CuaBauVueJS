@@ -1,6 +1,6 @@
 <template>
   <div class="dices">
-    <button v-on:click="raiseDice">Đổ hột</button>
+    <button v-on:click="raiseDice" :disabled="!!isRaised">Đổ hột</button>
     <ul id="dice-machine"> 
       <li v-for="(e) in arr" v-bind:key="e">
         <img class="dice-image" :src="text2url(num2text(e))"/>
@@ -28,9 +28,11 @@ export default {
       }
     },
     raiseDice() {
+      this.toogleIsRaised();
       let loopPick = setInterval(this.pickNumber, 100);
       setTimeout(() => {
-        clearInterval(loopPick)
+        clearInterval(loopPick);
+        this.toogleIsRaised();
       }, 2000)
     },
     num2text(n) {
