@@ -1,8 +1,8 @@
 <template>
   <div class="dices">
-    <button v-on:click="raiseDice">Đổ hột</button>
+    <button v-on:click="raiseDice" :disabled="!!isRaised">Đổ hột</button>
     <ul id="dice-machine"> 
-      <li v-for="(e) in arr" v-bind:key="e">
+      <li v-for="(e, i) in diceRes" v-bind:key="i">
         <img class="dice-image" :src="text2url(num2text(e))"/>
       </li>
     </ul>
@@ -12,34 +12,32 @@
 <script>
 export default {
   name: 'Dices',
-  props: ['text'],
+  props: ['text', 'num2text', 'text2url'],
   data() {
     return {
-      arr: [0, 0, 0],
+      diceRes: [0, 0, 0],
       isRaised: false
     }
   },
   methods: {
     async pickNumber() {
       let value;
-      for (let i in this.arr) {
+      for (let i in this.diceRes) {
         value = Math.floor(Math.random() * 6);
-        await this.$set(this.arr, i, value)
+        await this.$set(this.diceRes, i, value)
       }
     },
     raiseDice() {
+      this.toogleIsRaised();
       let loopPick = setInterval(this.pickNumber, 100);
       setTimeout(() => {
-        clearInterval(loopPick)
+        clearInterval(loopPick);
+        this.toogleIsRaised();
+        this.$store.commit('saveDiceRes', this.diceRes);
+        this.$emit('sendDiceRes');
       }, 2000)
     },
-    num2text(n) {
-      return this.text[n];
-    },
-    text2url(text) {
-      var images = require.context('../assets/', false, /\.jpg$/);
-      return images('./'+text+'.jpg');
-    },
+   
     toogleIsRaised() {
       this.isRaised = !this.isRaised;
     }
@@ -51,7 +49,7 @@ export default {
 <style scoped>
 #dice-machine {
   
-  padding: auto 0;
+  padding-left: 0;
 }
 
 #dice-machine li{
@@ -59,6 +57,6 @@ export default {
   margin: 3px;
 }
 .dice-image {
-  width: 60px
+  width: 20%;
 }
 </style>
