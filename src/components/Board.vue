@@ -1,5 +1,5 @@
 <template>
-  <div id="board">
+  <div id="board" v-on:getBetChild="retrieveBetArr">
       Board
       <ul id="board-item-list">
           <li class="board-item" v-for="(e, i) in text" :key="i">
@@ -14,17 +14,11 @@
 export default {
     name: "Board",
     props: ['text', 'num2text', 'text2url', 'score'],
-    data () {
-        return {
-            betArr: [0, 0, 0, 0, 0, 0]
-        }
-    },
     methods: {
         bet(i) {
             if (this.score == 0) return;
-            this.$set(this.betArr, i, ++this.betArr[i]);
-            this.$emit('betScore');
-        }
+            this.$store.dispatch("bet", i);
+        },
     }
 }
 </script>

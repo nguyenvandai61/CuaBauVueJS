@@ -1,9 +1,15 @@
 <template>
     <div>
-        <Score :score="score"/>
-        <Board v-on:betScore='lostScore' :text="text" :num2text='num2text' 
-        :text2url='text2url' :score='score'/>
-        <Dices :text="text" :num2text='num2text' 
+        <Score :score="this.$store.getters.score"/>
+        <Board 
+        :text="text" 
+        :num2text='num2text' 
+        :text2url='text2url' 
+        :score='this.$store.getters.score'/>
+        <Dices  
+        v-on:sendDiceRes='handleDiceRes'
+        :text="text" 
+        :num2text='num2text' 
         :text2url='text2url'/>
     </div>
 </template>
@@ -21,8 +27,7 @@ export default {
     },
     data() {
         return {
-            text: ["huou", "cua", "tom", "ca", "bau", "ga"],
-            score: 10000
+            text: ["huou", "cua", "tom", "ca", "bau", "ga"]
         }
     },
     methods: {
@@ -33,11 +38,35 @@ export default {
             let images = require.context('../assets/', false, /\.jpg$/);
             return images('./'+text+'.jpg');
         },
-        lostScore() {
-            if(this.score > 0)
-                this.score-= 1000;
+        handleDiceRes() {
+            console.log("HandleDiceres");
+            let dices = this.$store.getters.diceRes;
+            let bets = this.$store.getters.betArr;
+            console.log(bets);
+            console.log(dices);
+            let awardScore = 0;
+            
+            let duplicate = function(v, d) {
+                let r = 0;
+                for (let i of d) {
+                    if (i == v) r++;
+                }
+                return r;
+            }
+
+            for (let dice of dices) {
+                if (!bets[dice]) continue;
+                awardScore += bets[dice];
+                awardScore += bets[dice]*duplicate(dice,dices);
+                bets[dice] = 0;
+            }
+            awardScore*=1000;
+            this.$store.commit("awardScore", awardScore);
+
+            this.$store.commit("refreshBetArr");
         }
-    }
+    },
+    
 }
 </script>
 
