@@ -1,24 +1,30 @@
 <template>
-  <div id="board" v-on:getBetChild="retrieveBetArr">
+  <div id="board">
       Board
       <ul id="board-item-list">
           <li class="board-item" v-for="(e, i) in text" :key="i">
             <img @click='bet(i)' class="board-item-image" :src="text2url(e)" :alt="i"/>
+            <span>{{betArr[i]}}</span>
           </li>
       </ul>
-      {{betArr}}
   </div>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 export default {
     name: "Board",
-    props: ['text', 'num2text', 'text2url', 'score'],
+    props: ['text', 'num2text', 'text2url'],
+    computed: {
+      ...mapGetters({betArr: "BET_ARRAY"})
+    },
     methods: {
         bet(i) {
             if (this.score == 0) return;
-            this.$store.dispatch("bet", i);
+            this.guess(i);
+            this.dropScore();
         },
+        ...mapActions(['guess', 'dropScore'])
     }
 }
 </script>

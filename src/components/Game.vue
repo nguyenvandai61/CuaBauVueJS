@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Score :score="this.$store.getters.score"/>
+        <Score :score="score"/>
         <Board 
         :text="text" 
         :num2text='num2text' 
         :text2url='text2url' 
-        :score='this.$store.getters.score'/>
+        :score='score'/>
         <Dices  
         v-on:sendDiceRes='handleDiceRes'
         :text="text" 
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Dices from './Dices'
 import Board from './Board'
 import Score from './Score'
@@ -30,19 +31,22 @@ export default {
             text: ["huou", "cua", "tom", "ca", "bau", "ga"]
         }
     },
+    computed: {
+        ...mapGetters({score: 'SCORE', diceRes: 'DICE_RESULT', betArr: 'BET_ARRAY'})
+    },
     methods: {
         num2text(n) {
             return this.text[n];
         },
         text2url(text) {
-            let images = require.context('../assets/', false, /\.jpg$/);
+            let images = require.context('../assets/images', false, /\.jpg$/);
             return images('./'+text+'.jpg');
         },
         handleDiceRes() {
             console.log("HandleDiceres");
-            let dices = this.$store.getters.diceRes;
-            let bets = this.$store.getters.betArr;
-            console.log(bets);
+            let dices = this.diceRes;
+            let bets = this.betArr;
+            console.log(this.betArr);
             console.log(dices);
             let awardScore = 0;
             
@@ -61,10 +65,11 @@ export default {
                 bets[dice] = 0;
             }
             awardScore*=1000;
-            this.$store.commit("awardScore", awardScore);
-
-            this.$store.commit("refreshBetArr");
-        }
+            console.log(awardScore)
+            this.awardScore(awardScore);
+            this.refreshBetArr();
+        },
+        ...mapActions(['awardScore', 'refreshBetArr'])
     },
     
 }

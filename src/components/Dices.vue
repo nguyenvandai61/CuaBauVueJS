@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapActions}from 'vuex'
 export default {
   name: 'Dices',
   props: ['text', 'num2text', 'text2url'],
@@ -33,14 +34,15 @@ export default {
       setTimeout(() => {
         clearInterval(loopPick);
         this.toogleIsRaised();
-        this.$store.commit('saveDiceRes', this.diceRes);
+        this.saveDiceRes(this.diceRes);
         this.$emit('sendDiceRes');
       }, 2000)
     },
    
     toogleIsRaised() {
       this.isRaised = !this.isRaised;
-    }
+    },
+    ...mapActions(['saveDiceRes'])
   }
 }
 </script>
