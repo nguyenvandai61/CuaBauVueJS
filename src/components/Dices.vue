@@ -1,11 +1,11 @@
 <template>
   <div class="dices">
-    <button v-on:click="raiseDice" :disabled="!!isRaised">Đổ hột</button>
     <ul id="dice-machine"> 
       <li v-for="(e, i) in diceRes" v-bind:key="i">
         <img class="dice-image" :src="text2url(num2text(e))"/>
       </li>
     </ul>
+    <button v-on:click="raiseDice" :disabled="!!isRaised">Đổ hột</button>
   </div>
 </template>
 

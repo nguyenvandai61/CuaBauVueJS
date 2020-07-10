@@ -2,11 +2,13 @@
     <div>
         <Score :score="score"/>
         <Board 
+        class="board-handler"
         :text="text" 
         :num2text='num2text' 
         :text2url='text2url' 
         :score='score'/>
-        <Dices  
+        <Dices
+        class="dice-handler"
         v-on:sendDiceRes='handleDiceRes'
         :text="text" 
         :num2text='num2text' 
@@ -68,6 +70,9 @@ export default {
             console.log(awardScore)
             this.awardScore(awardScore);
             this.refreshBetArr();
+            console.log(this.betArr);
+            this.$forceUpdate();
+            console.log()
         },
         ...mapActions(['awardScore', 'refreshBetArr'])
     },
@@ -76,5 +81,14 @@ export default {
 </script>
 
 <style>
-
+    @media only screen and (min-width: 550px) {
+        .board-handler {
+            width: 50vw;
+            display: inline-block;
+        }
+        .dice-handler {
+            display: inline-block;
+            width: 40vw;
+        }
+}
 </style>

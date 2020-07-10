@@ -22,10 +22,12 @@ export default {
         bet(i) {
             if (this.score == 0) return;
             this.guess(i);
+            console.log(this.betArr);
+            this.$forceUpdate(); 
             this.dropScore();
         },
         ...mapActions(['guess', 'dropScore'])
-    }
+    },
 }
 </script>
 
