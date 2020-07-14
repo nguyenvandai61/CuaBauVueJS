@@ -5,7 +5,7 @@
         <img class="dice-image" :src="text2url(num2text(e))"/>
       </li>
     </ul>
-    <button v-on:click="raiseDice" :disabled="!!isRaised">Đổ hột</button>
+    <button class="btn-raise" v-on:click="raiseDice" :disabled="!!isRaised">Raise</button>
   </div>
 </template>
 
@@ -50,15 +50,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #dice-machine {
-  
+  background: crimson;
   padding-left: 0;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4%;
 }
 
 #dice-machine li{
-  display: inline;
+  display: inline-block;
   margin: 3px;
+  width: 30%;
 }
 .dice-image {
-  width: 20%;
+  width: 100%;
+}
+
+.btn-raise {
+  
 }
 </style>

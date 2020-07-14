@@ -1,6 +1,9 @@
 <template>
-    <div>
-        <Score :score="score"/>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Cua bầu</h1>
+            <Score class="score-handler" :score="score"/>
+        </div>
         <Board 
         class="board-handler"
         :text="text" 
@@ -81,10 +84,31 @@ export default {
 </script>
 
 <style>
+    .container {
+        margin: 20px;
+    }
+    .header {
+        display: flex;
+    
+        flex-flow: row;
+        justify-content: space-between;
+    }
+    .title{
+        font-family: 'Pacifico', cursive;
+        font-size: 2.5em;
+        margin :auto;
+    }
+    .score-handler {
+        font-family: 'Pacifico', cursive;
+    }
     @media only screen and (min-width: 550px) {
         .board-handler {
             width: 50vw;
             display: inline-block;
+        }
+        .title {
+            
+            font-size: 4em;
         }
         .dice-handler {
             display: inline-block;
