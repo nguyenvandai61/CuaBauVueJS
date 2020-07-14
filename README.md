@@ -1,5 +1,7 @@
 # cuabau
 
+Page was deployed at https://5f0de64b2bfff0593c69f4e6--confident-mcclintock-b4928b.netlify.app/ !
+
 ## Project setup
 ```
 npm install
