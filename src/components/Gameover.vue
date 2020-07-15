@@ -1,13 +1,22 @@
 <template>
   <div id="gameover-handler">
       <h2>Gameover</h2>
-      <button class="btn-play-again" type="reset">Play again!</button>
+      <button class="btn-play-again" type="reset" v-on:click="playAgain">Play again!</button>
   </div>
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex'
 
+export default {
+    methods: {
+        playAgain() {
+            this.refreshScore();
+            document.getElementsByClassName("gameover-handler")[0].style.visibility = "hidden";
+        },
+        
+        ...mapActions(["refreshScore"])
+    }
 }
 </script>
 
