@@ -23,7 +23,7 @@ export default {
         bet(i) {
             if (this.score == 0) return;
             this.guess(i);
-            console.log(this.betArr);
+            console.log(this.score);
             this.$forceUpdate(); 
             this.dropScore();
         },

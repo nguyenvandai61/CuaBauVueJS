@@ -1,5 +1,5 @@
 export default {
-    score: 10000,
+    score: 2000,
     betArr: [0,0,0,0,0,0],
     diceRes: []
 }

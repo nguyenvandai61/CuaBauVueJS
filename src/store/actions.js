@@ -19,6 +19,7 @@ export default {
     },
 
     dropScore({state, commit}) {
+        if (state.score == 0) return;
         let s = state.score - 1000;
         commit(SET_SCORE, s);
     },
