@@ -1,5 +1,6 @@
 # cuabau
-
+Netlify Status: 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/15ec90a6-483c-4076-983d-a137b3c863d5/deploy-status)](https://app.netlify.com/sites/suspicious-noyce-1359be/deploys)
 ## Project setup
 ```
 npm install
