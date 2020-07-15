@@ -19,6 +19,7 @@ export default {
     },
 
     dropScore({state, commit}) {
+        if (state.score == 0) return;
         let s = state.score - 1000;
         commit(SET_SCORE, s);
     },
@@ -34,7 +35,12 @@ export default {
     }, arr) {
         commit(SET_DICE_RESULT, arr)
     },
+    refreshScore({state, commit}) {
+        console.log("refresh score");
+        console.log(state.DEFAULT_SCORE);
+        commit(SET_SCORE, state.DEFAULT_SCORE);
 
+    },
     refreshBetArr({
         state,
         commit
@@ -45,4 +51,9 @@ export default {
         }
         commit(SET_BET_ARRAY, betArr);
     },
+
+    // refreshGame({state, commit}) {
+    //     // Refresh score
+        
+    // }
 }

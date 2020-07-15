@@ -1,6 +1,11 @@
 # cuabau
+Netlify Status: 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/15ec90a6-483c-4076-983d-a137b3c863d5/deploy-status)](https://app.netlify.com/sites/suspicious-noyce-1359be/deploys)
+Branch "development":
+  https://app.netlify.com/sites/suspicious-noyce-1359be/deploys/5f0e77a1d5571f000749195d
 
-Page was deployed at https://5f0de64b2bfff0593c69f4e6--confident-mcclintock-b4928b.netlify.app/ !
+Deployed at:
+  https://5f0e76b56cae8ab7f0061627--suspicious-noyce-1359be.netlify.app/
 
 ## Project setup
 ```

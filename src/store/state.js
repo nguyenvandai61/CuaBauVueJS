@@ -1,5 +1,7 @@
+const DEFAULT_SCORE = 10000;
 export default {
-    score: 10000,
+    score: DEFAULT_SCORE,
     betArr: [0,0,0,0,0,0],
-    diceRes: []
+    diceRes: [],
+    DEFAULT_SCORE
 }

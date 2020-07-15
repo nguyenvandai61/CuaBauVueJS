@@ -16,6 +16,7 @@
         :text="text" 
         :num2text='num2text' 
         :text2url='text2url'/>
+        <Gameover class="gameover-handler"/>
     </div>
 </template>
 
@@ -24,12 +25,14 @@ import { mapActions, mapGetters } from 'vuex'
 import Dices from './Dices'
 import Board from './Board'
 import Score from './Score'
+import Gameover from './Gameover'
 export default {
     name: "Game",
     components: {
         Dices,
         Board,
-        Score
+        Score,
+        Gameover
     },
     data() {
         return {
@@ -76,6 +79,18 @@ export default {
             console.log(this.betArr);
             this.$forceUpdate();
             console.log()
+            
+            // gameover handler
+            if (this.isGameover()) {
+                this.notifyGameover();
+            }
+        },
+        notifyGameover(){
+            console.log("Gameover");
+            document.getElementsByClassName("gameover-handler")[0].style.visibility = "visible";
+        },
+        isGameover() {
+            return this.score <= 0;
         },
         ...mapActions(['awardScore', 'refreshBetArr'])
     },
@@ -100,6 +115,14 @@ export default {
     }
     .score-handler {
         font-family: 'Pacifico', cursive;
+    }
+    .gameover-handler {
+        position: fixed;
+        top: 30%;
+        width: 50vw;
+        left: 20%;
+        font-size: 2em;
+        visibility: hidden;
     }
     @media only screen and (min-width: 550px) {
         .board-handler {
